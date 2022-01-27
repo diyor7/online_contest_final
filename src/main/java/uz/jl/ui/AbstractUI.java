@@ -1,5 +1,6 @@
 package uz.jl.ui;
 
+import com.google.gson.GsonBuilder;
 import uz.jl.service.base.BaseGenericService;
 import uz.jl.utils.Color;
 import uz.jl.utils.Print;
@@ -20,6 +21,6 @@ public abstract class AbstractUI<S extends BaseGenericService> {
     }
 
     protected <T> void showResponse(String color, T response) {
-        Print.println(color, response);
+        Print.println(color, new GsonBuilder().serializeNulls().create().toJson(response));
     }
 }
