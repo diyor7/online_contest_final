@@ -1,6 +1,8 @@
 package uz.jl.dto.user;
 
+import lombok.Builder;
 import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 import uz.jl.dto.GenericDto;
 import uz.jl.entity.Quiz;
 import uz.jl.entity.base.Auditable;
@@ -13,8 +15,11 @@ import java.util.List;
 /**
  * @author Doston Bokhodirov, Wed 11:14 PM. 1/26/2022
  */
+@Builder
 public class UserDto extends GenericDto {
 
+    @BsonProperty(value = "_id")
+    private ObjectId id;
     @BsonProperty(value = "full_name")
     private String fullName;
 

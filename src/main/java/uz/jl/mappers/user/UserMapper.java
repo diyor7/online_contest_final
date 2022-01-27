@@ -31,4 +31,23 @@ public class UserMapper extends GenericMapper<User, UserDto, UserCreateDto, User
     public User fromUpdateDto(UserUpdateDto dto) {
         return null;
     }
+
+    @Override
+    public UserDto toDto(User entity) {
+        return UserDto
+                .builder()
+                .id(entity.getId())
+                .userName(entity.getUserName())
+                .password(entity.getPassword())
+                .fullName(entity.getFullName())
+                .role(entity.getRole().toString())
+                .status(entity.getStatus().toString())
+                .language(entity.getLanguage().toString())
+                .build();
+    }
+
+    @Override
+    public User fromDto(UserDto dto) {
+        return null;
+    }
 }

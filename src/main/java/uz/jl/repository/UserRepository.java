@@ -3,6 +3,7 @@ package uz.jl.repository;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
 import org.bson.types.ObjectId;
+import uz.jl.configs.ApplicationContextHolder;
 import uz.jl.dto.user.UserCreateDto;
 import uz.jl.dto.user.UserUpdateDto;
 import uz.jl.entity.User;

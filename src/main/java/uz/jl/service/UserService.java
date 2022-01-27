@@ -1,10 +1,12 @@
 package uz.jl.service;
 
 import org.bson.types.ObjectId;
+import uz.jl.configs.ApplicationContextHolder;
 import uz.jl.dto.user.UserCreateDto;
 import uz.jl.dto.user.UserDto;
 import uz.jl.dto.user.UserUpdateDto;
 import uz.jl.entity.User;
+import uz.jl.enums.HttpStatus;
 import uz.jl.exception.ApiRuntimeException;
 import uz.jl.mappers.user.UserMapper;
 import uz.jl.repository.UserRepository;
@@ -23,6 +25,8 @@ import java.util.Objects;
 public class UserService extends AbstractService<UserRepository> implements GenericService<UserDto, ObjectId>,
         GenericCrudService<UserCreateDto, UserUpdateDto, ObjectId> {
 
+    private final UserMapper mapper = ApplicationContextHolder.getBean(UserMapper.class);
+
     public UserService(UserRepository repository) {
         super(repository);
     }
@@ -33,7 +37,7 @@ public class UserService extends AbstractService<UserRepository> implements Gene
             ObjectId objectId = repository.create(dto);
             return new ResponseEntity<>(new Data<>(objectId));
         } catch (IllegalArgumentException e) {
-            throw new ApiRuntimeException(e.getMessage(), e.getCause());
+            throw new ApiRuntimeException(e.getMessage(), HttpStatus.HTTP_400);
         }
     }
 
@@ -49,13 +53,12 @@ public class UserService extends AbstractService<UserRepository> implements Gene
 
     @Override
     public ResponseEntity<Data<UserDto>> get(ObjectId id) {
-//        User user = repository.get(id);
-//        if (Objects.isNull(user)) {
-//            throw new
-//        }
-
-//        return new ResponseEntity<>(new Data<>(user));
-        return null;
+        User user = repository.get(id);
+        if (Objects.isNull(user)) {
+            throw new ApiRuntimeException("User not found", HttpStatus.HTTP_404);
+        }
+        UserDto dto = mapper.toDto(user);
+        return new ResponseEntity<>(new Data<>(dto));
     }
 
     @Override
