@@ -4,8 +4,12 @@ import org.bson.types.ObjectId;
 import uz.jl.dto.question.QuestionCreateDto;
 import uz.jl.dto.question.QuestionUpdateDto;
 import uz.jl.entity.Question;
+import uz.jl.mappers.base.GenericMapper;
 
-public class QuestionMapper extends GenericMapper<Question, QuestionCreateDto, QuestionUpdateDto, ObjectId>{
+import java.util.List;
+
+public class QuestionMapper extends GenericMapper<Question, QuestionCreateDto, QuestionUpdateDto, ObjectId> {
+
     @Override
     public Question fromCreateDto(QuestionUpdateDto dto) {
         return null;
@@ -22,7 +26,17 @@ public class QuestionMapper extends GenericMapper<Question, QuestionCreateDto, Q
     }
 
     @Override
+    public List<QuestionCreateDto> toDto(List<Question> entityList) {
+        return null;
+    }
+
+    @Override
     public Question fromDto(QuestionCreateDto dto) {
+        return null;
+    }
+
+    @Override
+    public List<Question> fromDto(List<QuestionCreateDto> dtoList) {
         return null;
     }
 }

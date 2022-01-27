@@ -1,18 +1,15 @@
 package uz.jl.repository.base;
 
-import uz.jl.dto.BaseGenericDto;
-import uz.jl.dto.GenericDto;
 import uz.jl.entity.base.BaseGenericEntity;
 
 import java.io.Serializable;
 
-public interface GenericCrudRepository<E extends BaseGenericEntity,
-        CD extends BaseGenericDto, UD extends GenericDto, K extends Serializable>
+public interface GenericCrudRepository<E extends BaseGenericEntity, K extends Serializable>
         extends GenericRepository<E, K> {
 
-    K create(CD dto);
+    K create(E entity);
 
-    void update(UD dto);
+    void update(E entity);
 
     void delete(K id);
 }

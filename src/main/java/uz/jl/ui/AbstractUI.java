@@ -21,6 +21,6 @@ public abstract class AbstractUI<S extends BaseGenericService> {
     }
 
     protected <T> void showResponse(String color, T response) {
-        Print.println(color, new GsonBuilder().serializeNulls().create().toJson(response));
+        Print.println(color, new GsonBuilder().serializeNulls().setPrettyPrinting().create().toJson(response));
     }
 }

@@ -8,7 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import uz.jl.entity.User;
-import uz.jl.mappers.user.UserMapper;
+import uz.jl.mappers.UserMapper;
 import uz.jl.repository.AuthUserRepository;
 import uz.jl.repository.UserRepository;
 import uz.jl.service.AuthUserService;
@@ -17,7 +17,7 @@ import uz.jl.ui.AuthUI;
 import uz.jl.ui.MenuUI;
 import uz.jl.ui.UserUI;
 import uz.jl.utils.BaseUtils;
-import uz.jl.utils.validators.user.UserValidator;
+import uz.jl.utils.validators.UserValidator;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,11 +53,11 @@ public class ApplicationContextHolder {
         userMapper = new UserMapper();
         userValidator = new UserValidator();
 
-        authUserRepository = new AuthUserRepository(User.class, userMapper, userValidator);
-        userRepository = new UserRepository(User.class, userMapper, userValidator);
+        authUserRepository = new AuthUserRepository(User.class);
+        userRepository = new UserRepository(User.class);
 
-        userService = new UserService(userRepository);
-        authUserService = new AuthUserService(authUserRepository);
+        userService = new UserService(userRepository, userMapper, userValidator);
+        authUserService = new AuthUserService(authUserRepository, userMapper, userValidator);
 
         menuUI = new MenuUI();
         authUI = new AuthUI(authUserService);

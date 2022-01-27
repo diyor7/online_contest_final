@@ -1,4 +1,4 @@
-package uz.jl.utils.validators;
+package uz.jl.utils.validators.base;
 
 public interface BaseGenericValidator {
 }

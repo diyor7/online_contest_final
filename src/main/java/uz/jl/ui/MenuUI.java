@@ -1,7 +1,6 @@
 package uz.jl.ui;
 
 import uz.jl.configs.ApplicationContextHolder;
-import uz.jl.enums.Role;
 import uz.jl.security.SecurityHolder;
 import uz.jl.utils.Color;
 import uz.jl.utils.Input;
@@ -26,6 +25,7 @@ public class MenuUI {
             switch (str) {
                 case "1" -> authUI.login();
                 case "2" -> userUI.create();
+                case "3" -> userUI.get();
                 case "0" -> {
                     Print.println(Color.YELLOW, "Bye");
                     return;
@@ -33,47 +33,15 @@ public class MenuUI {
                 default -> Print.println(Color.RED, "Wrong choice");
             }
         } else {
-            switch (SecurityHolder.user.getRole()) {
-                case STUDENT -> studentMenu();
-
-//                case TEACHER ->
-
-//                case ADMIN ->
-
-            }
+//            switch (SecurityHolder.user.getRole()) {
+//                case STUDENT ->
+//
+////                case TEACHER ->
+//
+////                case ADMIN ->
+//
+//            }
         }
         menu();
     }
-
-    private static void studentMenu() {
-
-        Print.println("1. Quizzes");
-        Print.println("2. Solved Quizzes");
-        Print.println("3. Settings ");
-        Print.println("0. Logout");
-
-        String str = Input.getStr("Enter choice: ");
-
-        switch (str) {
-//            case "1" -> quizzesMenu();
-            case "2" -> allSolvedQuizzesMenu();
-            case "3" -> settingsMenu();
-            case "0" -> {
-                SecurityHolder.killUser();
-            }
-            default -> {
-                Print.println(Color.RED, "Wrong choice");
-                studentMenu();
-            }
-        }
-    }
-
-    private static void settingsMenu() {
-
-    }
-
-    private static void allSolvedQuizzesMenu() {
-
-    }
-
 }

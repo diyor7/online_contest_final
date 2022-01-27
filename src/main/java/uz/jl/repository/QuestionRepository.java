@@ -10,22 +10,23 @@ import uz.jl.repository.base.GenericCrudRepository;
 
 import java.util.List;
 
-public class QuestionRepository extends AbstractRepository<Question, QuestionMapper> implements
-        GenericCrudRepository<Question, QuestionCreateDto, QuestionUpdateDto, ObjectId> {
+public class QuestionRepository extends AbstractRepository<Question> implements
+        GenericCrudRepository<Question, ObjectId> {
 
-    protected QuestionRepository(Class<Question> clazz, QuestionMapper mapper) {
-        super(clazz, mapper);
+    protected QuestionRepository(Class<Question> clazz) {
+        super(clazz);
     }
 
     @Override
-    public ObjectId create(QuestionCreateDto dto) {
+    public ObjectId create(Question entity) {
         return null;
     }
 
     @Override
-    public void update(QuestionUpdateDto dto) {
+    public void update(Question entity) {
 
     }
+
 
     @Override
     public void delete(ObjectId id) {

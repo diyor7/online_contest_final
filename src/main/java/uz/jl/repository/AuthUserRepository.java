@@ -5,19 +5,17 @@ import uz.jl.entity.User;
 import uz.jl.enums.HttpStatus;
 import uz.jl.exception.ApiRuntimeException;
 import uz.jl.exception.CustomSQLException;
-import uz.jl.mappers.user.UserMapper;
 import uz.jl.repository.base.AbstractRepository;
-import uz.jl.utils.validators.user.UserValidator;
+import uz.jl.utils.validators.UserValidator;
 
 /**
  * @author Doston Bokhodirov, Thu 12:11 AM. 1/27/2022
  */
-public class AuthUserRepository extends AbstractRepository<User, UserMapper> {
+public class AuthUserRepository extends AbstractRepository<User> {
     UserValidator validator;
 
-    public AuthUserRepository(Class<User> clazz, UserMapper mapper, UserValidator validator) {
-        super(clazz, mapper);
-        this.validator =  validator;
+    public AuthUserRepository(Class<User> clazz) {
+        super(clazz);
     }
 
     public User login(String username, String password) {

@@ -4,26 +4,26 @@ import org.bson.types.ObjectId;
 import uz.jl.dto.quiz.QuizCreateDto;
 import uz.jl.dto.quiz.QuizUpdateDto;
 import uz.jl.entity.Quiz;
-import uz.jl.mappers.quiz.QuizMapper;
+import uz.jl.mappers.QuizMapper;
 import uz.jl.repository.base.AbstractRepository;
 import uz.jl.repository.base.GenericCrudRepository;
 
 import java.util.List;
 
-public class QuizRepository extends AbstractRepository<Quiz, QuizMapper>
-        implements GenericCrudRepository<Quiz, QuizCreateDto, QuizUpdateDto, ObjectId> {
+public class QuizRepository extends AbstractRepository<Quiz>
+        implements GenericCrudRepository<Quiz, ObjectId> {
 
-    protected QuizRepository(Class<Quiz> clazz, QuizMapper mapper) {
-        super(clazz, mapper);
+    protected QuizRepository(Class<Quiz> clazz) {
+        super(clazz);
     }
 
     @Override
-    public ObjectId create(QuizCreateDto dto) {
+    public ObjectId create(Quiz entity) {
         return null;
     }
 
     @Override
-    public void update(QuizUpdateDto dto) {
+    public void update(Quiz entity) {
 
     }
 

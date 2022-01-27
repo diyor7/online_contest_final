@@ -1,4 +1,4 @@
-package uz.jl.utils.validators.user;
+package uz.jl.utils.validators;
 
 import org.bson.types.ObjectId;
 import uz.jl.dto.user.UserCreateDto;
@@ -8,7 +8,7 @@ import uz.jl.enums.HttpStatus;
 import uz.jl.enums.Status;
 import uz.jl.exception.ApiRuntimeException;
 import uz.jl.exception.CustomSQLException;
-import uz.jl.utils.validators.GenericValidator;
+import uz.jl.utils.validators.base.GenericValidator;
 
 import java.util.Objects;
 

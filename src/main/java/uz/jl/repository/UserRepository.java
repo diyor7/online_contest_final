@@ -1,41 +1,31 @@
 package uz.jl.repository;
 
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
 import org.bson.types.ObjectId;
-import uz.jl.configs.ApplicationContextHolder;
 import uz.jl.dto.user.UserCreateDto;
 import uz.jl.dto.user.UserUpdateDto;
 import uz.jl.entity.User;
-import uz.jl.mappers.user.UserMapper;
 import uz.jl.repository.base.AbstractRepository;
 import uz.jl.repository.base.GenericCrudRepository;
-import uz.jl.utils.validators.user.UserValidator;
+import uz.jl.utils.validators.UserValidator;
 
 import java.util.List;
-import java.util.Objects;
 
 
-public class UserRepository extends AbstractRepository<User, UserMapper>
-        implements GenericCrudRepository<User, UserCreateDto, UserUpdateDto, ObjectId> {
+public class UserRepository extends AbstractRepository<User>
+        implements GenericCrudRepository<User, ObjectId> {
 
-    private final UserValidator validator;
-
-    public UserRepository(Class<User> clazz, UserMapper userMapper, UserValidator userValidator) {
-        super(clazz, userMapper);
-        this.validator = userValidator;
+    public UserRepository(Class<User> clazz) {
+        super(clazz);
     }
 
     @Override
-    public ObjectId create(UserCreateDto dto) {
-        validator.validOnCreate(dto);
-        User user = mapper.fromCreateDto(dto);
-        collection.insertOne(user);
-        return user.getId();
+    public ObjectId create(User entity) {
+        return null;
     }
 
     @Override
-    public void update(UserUpdateDto dto) {
+    public void update(User entity) {
 
     }
 

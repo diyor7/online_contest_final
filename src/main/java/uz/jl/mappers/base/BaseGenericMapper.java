@@ -1,4 +1,4 @@
-package uz.jl.mappers;
+package uz.jl.mappers.base;
 
 public interface BaseGenericMapper {
 }

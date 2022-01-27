@@ -11,6 +11,7 @@ import uz.jl.response.ResponseEntity;
 import uz.jl.security.SecurityHolder;
 import uz.jl.service.UserService;
 import uz.jl.utils.Input;
+import uz.jl.utils.Color;
 
 import java.util.Objects;
 
@@ -41,7 +42,8 @@ public class UserUI extends AbstractUI<UserService> {
             } else if (SecurityHolder.user.getRole().equals(Role.ADMIN)) {
                 dto.setRole(Role.TEACHER);
             }
-            userService.create(dto);
+            ResponseEntity<Data<ObjectId>> response = userService.create(dto);
+            showResponse(Color.BLUE, response);
         } catch (ApiRuntimeException e) {
             showResponse(e.getMessage());
         }

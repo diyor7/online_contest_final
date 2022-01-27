@@ -1,4 +1,4 @@
-package uz.jl.utils.validators;
+package uz.jl.utils.validators.base;
 
 import uz.jl.configs.ApplicationContextHolder;
 import uz.jl.dto.BaseGenericDto;

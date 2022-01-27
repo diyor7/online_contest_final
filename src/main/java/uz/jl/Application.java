@@ -11,10 +11,6 @@ public class Application {
     private static final UserUI userUI = ApplicationContextHolder.getBean(UserUI.class);
 
     public static void main(String[] args) {
-        run();
-    }
-
-    private static void run() {
         MenuUI.menu();
     }
 
