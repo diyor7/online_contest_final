@@ -53,7 +53,7 @@ public class ApplicationContextHolder {
         userMapper = new UserMapper();
         userValidator = new UserValidator();
 
-        authUserRepository = new AuthUserRepository(User.class, userMapper);
+        authUserRepository = new AuthUserRepository(User.class, userMapper, userValidator);
         userRepository = new UserRepository(User.class, userMapper, userValidator);
 
         userService = new UserService(userRepository);

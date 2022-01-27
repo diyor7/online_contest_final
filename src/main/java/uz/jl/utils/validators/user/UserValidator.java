@@ -3,7 +3,10 @@ package uz.jl.utils.validators.user;
 import org.bson.types.ObjectId;
 import uz.jl.dto.user.UserCreateDto;
 import uz.jl.dto.user.UserUpdateDto;
+import uz.jl.entity.User;
 import uz.jl.enums.HttpStatus;
+import uz.jl.enums.Status;
+import uz.jl.exception.ApiRuntimeException;
 import uz.jl.exception.CustomSQLException;
 import uz.jl.utils.validators.GenericValidator;
 
@@ -21,13 +24,23 @@ public class UserValidator extends GenericValidator<UserCreateDto, UserUpdateDto
 
     @Override
     public void validOnCreate(UserCreateDto dto) throws IllegalArgumentException {
-        if (Objects.isNull(dto.getUsername())||Objects.isNull(dto.getFullName())||Objects.isNull(dto.getPassword())) {
-            throw new CustomSQLException("BAD_REQUEST", HttpStatus.HTTP_400,"");
+        if (Objects.isNull(dto.getUsername()) || Objects.isNull(dto.getFullName()) || Objects.isNull(dto.getPassword())) {
+            throw new CustomSQLException("BAD_REQUEST", HttpStatus.HTTP_400, "");
         }
     }
 
     @Override
     public void validOnUpdate(UserUpdateDto dto) throws IllegalArgumentException {
+
+    }
+
+    public void validOnSessionUser(User user) {
+        if (Objects.isNull(user)) {
+            throw new ApiRuntimeException("Bad credentials", HttpStatus.HTTP_404);
+        }
+        if (user.getStatus().equals(Status.NO_ACTIVE) || user.getStatus().equals(Status.BLOCKED)) {
+            throw new ApiRuntimeException("User not ACTIVE", HttpStatus.HTTP_401);
+        }
 
     }
 }

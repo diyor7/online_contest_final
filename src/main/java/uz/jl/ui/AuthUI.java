@@ -20,7 +20,7 @@ public class AuthUI extends AbstractUI<AuthUserService> {
         try {
             String username = Input.getStr("Enter username: ");
             String password = Input.getStr("Enter password: ");
-            authUserService.login(username, password);
+            showResponse(authUserService.login(username, password));
         } catch (ApiRuntimeException e) {
             showResponse(e.getMessage());
         }

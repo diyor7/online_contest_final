@@ -1,6 +1,7 @@
 package uz.jl.ui;
 
 import uz.jl.configs.ApplicationContextHolder;
+import uz.jl.enums.Role;
 import uz.jl.security.SecurityHolder;
 import uz.jl.utils.Color;
 import uz.jl.utils.Input;
@@ -9,10 +10,12 @@ import uz.jl.utils.Print;
 import java.util.Objects;
 
 public class MenuUI {
-    private static final AuthUI authUI = ApplicationContextHolder.getBean(AuthUI.class);
-    private static final UserUI userUI = ApplicationContextHolder.getBean(UserUI.class);
+    private static AuthUI authUI;
+    private static UserUI userUI;
 
     public static void menu() {
+        userUI = ApplicationContextHolder.getBean(UserUI.class);
+        authUI = ApplicationContextHolder.getBean(AuthUI.class);
         if (Objects.isNull(SecurityHolder.user)) {
             Print.println(Color.BLUE, "1. Login");
             Print.println(Color.BLUE, "2. Register");
@@ -31,15 +34,12 @@ public class MenuUI {
             }
         } else {
             switch (SecurityHolder.user.getRole()) {
-                case STUDENT:
-                    studentMenu();
-                    break;
-                case TEACHER:
+                case STUDENT -> studentMenu();
 
-                    break;
-                case ADMIN:
+//                case TEACHER ->
 
-                    break;
+//                case ADMIN ->
+
             }
         }
         menu();
