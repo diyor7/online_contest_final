@@ -17,4 +17,14 @@ public class QuizMapper extends GenericMapper<Quiz, QuizDto, QuizCreateDto, Quiz
     public Quiz fromUpdateDto(QuizUpdateDto dto) {
         return null;
     }
+
+    @Override
+    public QuizDto toDto(Quiz entity) {
+        return null;
+    }
+
+    @Override
+    public Quiz fromDto(QuizDto dto) {
+        return null;
+    }
 }

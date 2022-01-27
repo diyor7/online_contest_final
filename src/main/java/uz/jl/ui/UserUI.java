@@ -3,8 +3,11 @@ package uz.jl.ui;
 import org.bson.types.ObjectId;
 import uz.jl.configs.ApplicationContextHolder;
 import uz.jl.dto.user.UserCreateDto;
+import uz.jl.dto.user.UserDto;
 import uz.jl.enums.Role;
 import uz.jl.exception.ApiRuntimeException;
+import uz.jl.response.Data;
+import uz.jl.response.ResponseEntity;
 import uz.jl.security.SecurityHolder;
 import uz.jl.service.UserService;
 import uz.jl.utils.Input;
@@ -16,6 +19,7 @@ import java.util.Objects;
  */
 public class UserUI extends AbstractUI<UserService> {
     private final UserService userService = ApplicationContextHolder.getBean(UserService.class);
+
 
     public UserUI(UserService service) {
         super(service);
@@ -44,9 +48,14 @@ public class UserUI extends AbstractUI<UserService> {
     }
 
     public void get() {
-        String idStr = Input.getStr("Enter id: ");
-        ObjectId id = new ObjectId(idStr);
-        service.get(id);
+        try {
+            String idStr = Input.getStr("Enter id: ");
+            ObjectId id = new ObjectId(idStr);
+            ResponseEntity<Data<UserDto>> response = service.get(id);
+            showResponse(response);
+        } catch (ApiRuntimeException e) {
+            showResponse(e.getMessage());
+        }
     }
 
     public void update() {

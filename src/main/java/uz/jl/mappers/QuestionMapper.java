@@ -15,4 +15,14 @@ public class QuestionMapper extends GenericMapper<Question, QuestionCreateDto, Q
     public Question fromUpdateDto(ObjectId dto) {
         return null;
     }
+
+    @Override
+    public QuestionCreateDto toDto(Question entity) {
+        return null;
+    }
+
+    @Override
+    public Question fromDto(QuestionCreateDto dto) {
+        return null;
+    }
 }
