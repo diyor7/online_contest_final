@@ -43,10 +43,22 @@ public class UserUI extends AbstractUI<UserService> {
         }
     }
 
-    public void get(){
-        String idStr =Input.getStr("Enter id: ");
+    public void get() {
+        String idStr = Input.getStr("Enter id: ");
         ObjectId id = new ObjectId(idStr);
         service.get(id);
+    }
+
+    public void update() {
+
+    }
+
+    public void delete() {
+
+    }
+
+    public void getAll() {
+
     }
 
 }
