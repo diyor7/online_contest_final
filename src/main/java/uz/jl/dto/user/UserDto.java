@@ -15,11 +15,9 @@ import java.util.List;
 /**
  * @author Doston Bokhodirov, Wed 11:14 PM. 1/26/2022
  */
-@Builder
+@Builder(builderMethodName = "childBuilder")
 public class UserDto extends GenericDto {
 
-    @BsonProperty(value = "_id")
-    private ObjectId id;
     @BsonProperty(value = "full_name")
     private String fullName;
 

@@ -1,21 +1,29 @@
 package uz.jl.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import uz.jl.dto.user.UserCreateDto;
 import uz.jl.dto.user.UserDto;
 import uz.jl.dto.user.UserUpdateDto;
 import uz.jl.entity.User;
 import uz.jl.enums.HttpStatus;
+import uz.jl.enums.Role;
 import uz.jl.exception.ApiRuntimeException;
 import uz.jl.mappers.UserMapper;
 import uz.jl.repository.UserRepository;
 import uz.jl.response.Data;
 import uz.jl.response.ResponseEntity;
+import uz.jl.security.SecurityHolder;
 import uz.jl.service.base.AbstractService;
 import uz.jl.service.base.GenericCrudService;
 import uz.jl.service.base.GenericService;
 import uz.jl.utils.validators.UserValidator;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,28 +42,34 @@ public class UserService extends AbstractService<UserRepository, UserMapper, Use
         try {
             validator.validOnCreate(dto);
             User user = mapper.fromCreateDto(dto);
+            user.setId(new ObjectId());
             ObjectId objectId = repository.create(user);
             return new ResponseEntity<>(new Data<>(objectId));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ApiRuntimeException e) {
             throw new ApiRuntimeException(e.getMessage(), HttpStatus.HTTP_400);
         }
     }
 
     @Override
     public ResponseEntity<Data<Void>> update(UserUpdateDto dto) {
-        return null;
+        validator.validOnUpdate(dto);
+        User user = mapper.fromUpdateDto(dto);
+        repository.update(user);
+        return new ResponseEntity<>(new Data<>(null));
     }
+
 
     @Override
     public ResponseEntity<Data<Void>> delete(ObjectId id) {
-        return null;
+        repository.delete(id);
+        return new ResponseEntity<>(new Data<>(null));
     }
 
     @Override
     public ResponseEntity<Data<UserDto>> get(ObjectId id) {
         User user = repository.get(id);
         if (Objects.isNull(user)) {
-            throw new ApiRuntimeException("User not found", HttpStatus.HTTP_404);
+            throw new ApiRuntimeException("USER_NOT_FOUND", HttpStatus.HTTP_404);
         }
         UserDto dto = mapper.toDto(user);
         return new ResponseEntity<>(new Data<>(dto));
@@ -63,6 +77,11 @@ public class UserService extends AbstractService<UserRepository, UserMapper, Use
 
     @Override
     public ResponseEntity<Data<List<UserDto>>> getAll() {
-        return null;
+        if (Objects.isNull(SecurityHolder.user) || !SecurityHolder.user.getRole().equals(Role.ADMIN)) {
+            throw new ApiRuntimeException("PERMISSION_DENIED", HttpStatus.HTTP_405);
+        }
+        List<User> userList = repository.getAll();
+        List<UserDto> userDtoList = mapper.toDto(userList);
+        return new ResponseEntity<>(new Data<>(userDtoList));
     }
 }

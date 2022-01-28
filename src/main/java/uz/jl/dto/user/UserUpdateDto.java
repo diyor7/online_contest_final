@@ -1,5 +1,9 @@
 package uz.jl.dto.user;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import uz.jl.dto.GenericDto;
 import uz.jl.entity.Quiz;
@@ -12,6 +16,9 @@ import java.util.List;
 /**
  * @author Doston Bokhodirov, Wed 10:54 PM. 1/26/2022
  */
+@Getter
+@Setter
+@Builder(builderMethodName = "childBuilder")
 public class UserUpdateDto extends GenericDto {
 
     @BsonProperty(value = "full_name")

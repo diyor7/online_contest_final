@@ -1,5 +1,6 @@
 package uz.jl.dto.user;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import uz.jl.dto.BaseGenericDto;
@@ -16,6 +17,7 @@ import uz.jl.enums.Role;
 public class UserCreateDto implements BaseGenericDto {
 
     @BsonProperty(value = "full_name")
+    @SerializedName("full_name")
     private String fullName;
 
     private String username;

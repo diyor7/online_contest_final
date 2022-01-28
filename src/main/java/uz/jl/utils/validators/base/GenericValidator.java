@@ -25,18 +25,18 @@ public abstract class GenericValidator<
     /**
      * @param id
      */
-    public abstract void validKey(K id) throws IllegalArgumentException;
+    public abstract void validKey(K id);
 
     /**
      * Info for this method
      *
      * @param dto
      */
-    public abstract void validOnCreate(CD dto) throws IllegalArgumentException;
+    public abstract void validOnCreate(CD dto);
 
     /**
      * @param dto
      */
-    public abstract void validOnUpdate(UD dto) throws IllegalArgumentException;
+    public abstract void validOnUpdate(UD dto);
 
 }

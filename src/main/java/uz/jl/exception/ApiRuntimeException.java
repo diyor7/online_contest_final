@@ -8,11 +8,7 @@ import uz.jl.enums.HttpStatus;
  */
 public class ApiRuntimeException extends RuntimeException {
     @Getter
-    private Integer status;
-
-    public ApiRuntimeException(String message, Throwable cause) {
-        super(message, cause);
-    }
+    private final Integer status;
 
     public ApiRuntimeException(String message, HttpStatus status) {
         super(message);

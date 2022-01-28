@@ -8,6 +8,8 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import uz.jl.entity.User;
+import uz.jl.mappers.QuestionMapper;
+import uz.jl.mappers.QuizMapper;
 import uz.jl.mappers.UserMapper;
 import uz.jl.repository.AuthUserRepository;
 import uz.jl.repository.UserRepository;
@@ -32,6 +34,8 @@ public class ApplicationContextHolder {
     private static final BaseUtils baseUtils;
 
     private static final UserMapper userMapper;
+    private static final QuizMapper quizMapper;
+    private static final QuestionMapper questionMapper;
     private static final UserValidator userValidator;
 
     private static final UserRepository userRepository;
@@ -43,14 +47,14 @@ public class ApplicationContextHolder {
     private static final AuthUI authUI;
     private static final UserUI userUI;
 
-    private static final MenuUI menuUI;
-
     static {
         connect();
 
         baseUtils = new BaseUtils();
 
         userMapper = new UserMapper();
+        quizMapper = new QuizMapper();
+        questionMapper = new QuestionMapper();
         userValidator = new UserValidator();
 
         authUserRepository = new AuthUserRepository(User.class);
@@ -59,7 +63,6 @@ public class ApplicationContextHolder {
         userService = new UserService(userRepository, userMapper, userValidator);
         authUserService = new AuthUserService(authUserRepository, userMapper, userValidator);
 
-        menuUI = new MenuUI();
         authUI = new AuthUI(authUserService);
         userUI = new UserUI(userService);
     }
@@ -79,12 +82,13 @@ public class ApplicationContextHolder {
             case "AuthUserService" -> (T) authUserService;
 
             case "UserMapper" -> (T) userMapper;
+            case "QuizMapper" -> (T) quizMapper;
+            case "QuestionMapper" -> (T) questionMapper;
 
             case "UserValidator" -> (T) userValidator;
 
             case "UserUI" -> (T) userUI;
             case "AuthUI" -> (T) authUI;
-            case "MenuUI" -> (T) menuUI;
 
             case "BaseUtils" -> (T) baseUtils;
 

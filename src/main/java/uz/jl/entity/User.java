@@ -1,5 +1,6 @@
 package uz.jl.entity;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import uz.jl.entity.base.Auditable;
@@ -18,9 +19,11 @@ import java.util.List;
 public class User extends Auditable {
 
     @BsonProperty(value = "full_name")
+    @SerializedName("full_name")
     private String fullName;
 
     @BsonProperty(value = "user_name")
+    @SerializedName("user_name")
     private String userName;
 
     private String password;

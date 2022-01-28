@@ -7,7 +7,6 @@ import uz.jl.entity.User;
 import uz.jl.enums.HttpStatus;
 import uz.jl.enums.Status;
 import uz.jl.exception.ApiRuntimeException;
-import uz.jl.exception.CustomSQLException;
 import uz.jl.utils.validators.base.GenericValidator;
 
 import java.util.Objects;
@@ -18,20 +17,24 @@ import java.util.Objects;
 public class UserValidator extends GenericValidator<UserCreateDto, UserUpdateDto, ObjectId> {
 
     @Override
-    public void validKey(ObjectId id) throws IllegalArgumentException {
+    public void validKey(ObjectId id) {
 
     }
 
     @Override
-    public void validOnCreate(UserCreateDto dto) throws IllegalArgumentException {
-        if (Objects.isNull(dto.getUsername()) || Objects.isNull(dto.getFullName()) || Objects.isNull(dto.getPassword())) {
-            throw new CustomSQLException("BAD_REQUEST", HttpStatus.HTTP_400, "");
+    public void validOnCreate(UserCreateDto dto) {
+        if (Objects.isNull(dto.getUsername())
+                || Objects.isNull(dto.getFullName())
+                || Objects.isNull(dto.getPassword())) {
+            throw new ApiRuntimeException("BAD_REQUEST", HttpStatus.HTTP_400);
         }
     }
 
     @Override
-    public void validOnUpdate(UserUpdateDto dto) throws IllegalArgumentException {
-
+    public void validOnUpdate(UserUpdateDto dto) {
+        if (Objects.isNull(dto.getId())) {
+            throw new ApiRuntimeException("BAD_REQUEST", HttpStatus.HTTP_400);
+        }
     }
 
     public void validOnSessionUser(User user) {

@@ -13,7 +13,6 @@ import uz.jl.utils.Input;
  * @author Doston Bokhodirov, Thu 12:08 AM. 1/27/2022
  */
 public class AuthUI extends AbstractUI<AuthUserService> {
-    private final AuthUserService authUserService = ApplicationContextHolder.getBean(AuthUserService.class);
 
     public AuthUI(AuthUserService service) {
         super(service);
@@ -23,7 +22,7 @@ public class AuthUI extends AbstractUI<AuthUserService> {
         try {
             String username = Input.getStr("Enter username: ");
             String password = Input.getStr("Enter password: ");
-            ResponseEntity<Data<Boolean>> response = authUserService.login(username, password);
+            ResponseEntity<Data<Boolean>> response = service.login(username, password);
             showResponse(Color.BLUE, response);
         } catch (ApiRuntimeException e) {
             showResponse(e.getMessage());

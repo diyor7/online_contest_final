@@ -1,5 +1,6 @@
 package uz.jl.mappers;
 
+import org.bson.types.ObjectId;
 import uz.jl.dto.user.UserCreateDto;
 import uz.jl.dto.user.UserDto;
 import uz.jl.dto.user.UserUpdateDto;
@@ -9,7 +10,9 @@ import uz.jl.enums.Status;
 import uz.jl.mappers.base.BaseGenericMapper;
 import uz.jl.mappers.base.GenericMapper;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Doston Bokhodirov, Wed 11:10 PM. 1/26/2022
@@ -30,26 +33,37 @@ public class UserMapper extends GenericMapper<User, UserDto, UserCreateDto, User
 
     @Override
     public User fromUpdateDto(UserUpdateDto dto) {
-        return null;
+        User user = User
+                .childBuilder()
+                .userName(dto.getUsername())
+                .fullName(dto.getFullName())
+                .password(dto.getPassword())
+                .status(dto.getStatus())
+                .language(dto.getLanguage())
+                .role(dto.getRole())
+                .build();
+        user.setId(new ObjectId(dto.getId()));
+        return user;
     }
 
     @Override
     public UserDto toDto(User entity) {
-        return UserDto
-                .builder()
-                .id(entity.getId())
+        UserDto userDto = UserDto
+                .childBuilder()
                 .userName(entity.getUserName())
                 .password(entity.getPassword())
                 .fullName(entity.getFullName())
-                .role(entity.getRole().toString())
-                .status(entity.getStatus().toString())
-                .language(entity.getLanguage().toString())
+                .role(String.valueOf(entity.getRole()))
+                .status(String.valueOf(entity.getStatus()))
+                .language(String.valueOf(entity.getLanguage()))
                 .build();
+        userDto.setId(String.valueOf(entity.getId()));
+        return userDto;
     }
 
     @Override
     public List<UserDto> toDto(List<User> entityList) {
-        return null;
+        return entityList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     @Override
