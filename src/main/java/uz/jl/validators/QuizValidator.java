@@ -1,9 +1,9 @@
-package uz.jl.utils.validators;
+package uz.jl.validators;
 
 import org.bson.types.ObjectId;
 import uz.jl.dto.quiz.QuizCreateDto;
 import uz.jl.dto.quiz.QuizUpdateDto;
-import uz.jl.utils.validators.base.GenericValidator;
+import uz.jl.validators.base.GenericValidator;
 
 /**
  * @author Doston Bokhodirov, Thu 7:00 PM. 1/27/2022

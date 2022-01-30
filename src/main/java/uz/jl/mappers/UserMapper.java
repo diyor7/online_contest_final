@@ -10,7 +10,6 @@ import uz.jl.enums.Status;
 import uz.jl.mappers.base.BaseGenericMapper;
 import uz.jl.mappers.base.GenericMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,7 @@ public class UserMapper extends GenericMapper<User, UserDto, UserCreateDto, User
     public User fromCreateDto(UserCreateDto dto) {
         return User
                 .childBuilder()
-                .userName(dto.getUsername())
+                .username(dto.getUsername())
                 .fullName(dto.getFullName())
                 .password(dto.getPassword())
                 .status(Status.NO_ACTIVE)
@@ -33,24 +32,23 @@ public class UserMapper extends GenericMapper<User, UserDto, UserCreateDto, User
 
     @Override
     public User fromUpdateDto(UserUpdateDto dto) {
-        User user = User
+        return User
                 .childBuilder()
-                .userName(dto.getUsername())
+                .username(dto.getUsername())
                 .fullName(dto.getFullName())
                 .password(dto.getPassword())
                 .status(dto.getStatus())
                 .language(dto.getLanguage())
                 .role(dto.getRole())
+                .id(new ObjectId(dto.getId()))
                 .build();
-        user.setId(new ObjectId(dto.getId()));
-        return user;
     }
 
     @Override
     public UserDto toDto(User entity) {
         UserDto userDto = UserDto
                 .childBuilder()
-                .userName(entity.getUserName())
+                .userName(entity.getUsername())
                 .password(entity.getPassword())
                 .fullName(entity.getFullName())
                 .role(String.valueOf(entity.getRole()))

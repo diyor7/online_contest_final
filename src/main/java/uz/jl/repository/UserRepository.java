@@ -6,7 +6,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
-import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import uz.jl.entity.User;
@@ -36,7 +35,8 @@ public class UserRepository extends AbstractRepository<User>
     public void update(User entity) {
         BasicDBObject query = new BasicDBObject();
         ObjectMapper mapper = new ObjectMapper();
-        HashMap<String, Object> map = mapper.convertValue(entity, new TypeReference<>() {});
+        HashMap<String, Object> map = mapper.convertValue(entity, new TypeReference<>() {
+        });
         query.append("$set", new BasicDBObject(map));
         Bson filter = Filters.eq("_id", new ObjectId(String.valueOf(entity.getId())));
         collection.updateOne(filter, query);
@@ -45,7 +45,7 @@ public class UserRepository extends AbstractRepository<User>
     @Override
     public void delete(ObjectId id) {
         Bson filter = Filters.eq("_id", id);
-        Bson update = Updates.set("status", Status.DELETED);
+        Bson update = Updates.set("status", String.valueOf(Status.DELETED));
         collection.updateOne(filter, update);
     }
 
@@ -57,8 +57,8 @@ public class UserRepository extends AbstractRepository<User>
     @Override
     public List<User> getAll() {
         List<User> userList = new ArrayList<>();
-        FindIterable<User> iterDoc = collection.find();
-        for (User user : iterDoc) {
+        FindIterable<User> users = collection.find();
+        for (User user : users) {
             userList.add(user);
         }
         return userList;

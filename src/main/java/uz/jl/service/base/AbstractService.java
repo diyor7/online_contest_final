@@ -2,7 +2,7 @@ package uz.jl.service.base;
 
 import uz.jl.mappers.base.BaseGenericMapper;
 import uz.jl.repository.base.BaseGenericRepository;
-import uz.jl.utils.validators.base.BaseGenericValidator;
+import uz.jl.validators.base.BaseGenericValidator;
 
 /**
  * @author Doston Bokhodirov, Wed 11:25 PM. 1/26/2022

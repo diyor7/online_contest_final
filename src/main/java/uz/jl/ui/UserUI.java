@@ -1,6 +1,5 @@
 package uz.jl.ui;
 
-import com.mongodb.MongoException;
 import org.bson.types.ObjectId;
 import uz.jl.dto.user.UserCreateDto;
 import uz.jl.dto.user.UserDto;
@@ -72,7 +71,7 @@ public class UserUI extends AbstractUI<UserService> {
             userUpdateDto.setId(id);
             service.update(userUpdateDto);
             showResponse(Color.BLUE, service.get(new ObjectId(userUpdateDto.getId())).getBody());
-        } catch (ApiRuntimeException | MongoException e) {
+        } catch (ApiRuntimeException e) {
             showResponse(e.getMessage());
         }
     }
@@ -86,7 +85,7 @@ public class UserUI extends AbstractUI<UserService> {
             String id = Input.getStr("Enter id: ");
             service.delete(new ObjectId(id));
             showResponse(Color.BLUE, "USER_SUCCESSFULLY_DELETED");
-        } catch (ApiRuntimeException | MongoException e) {
+        } catch (ApiRuntimeException e) {
             showResponse(e.getMessage());
         }
     }

@@ -11,7 +11,7 @@ import uz.jl.response.ResponseEntity;
 import uz.jl.service.base.AbstractService;
 import uz.jl.service.base.GenericCrudService;
 import uz.jl.service.base.GenericService;
-import uz.jl.utils.validators.QuizValidator;
+import uz.jl.validators.QuizValidator;
 
 import java.util.List;
 

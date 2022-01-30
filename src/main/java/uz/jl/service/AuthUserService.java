@@ -9,7 +9,7 @@ import uz.jl.response.Data;
 import uz.jl.response.ResponseEntity;
 import uz.jl.security.SecurityHolder;
 import uz.jl.service.base.AbstractService;
-import uz.jl.utils.validators.UserValidator;
+import uz.jl.validators.UserValidator;
 
 import java.util.Objects;
 

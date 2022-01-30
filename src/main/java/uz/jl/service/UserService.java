@@ -1,10 +1,5 @@
 package uz.jl.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
-import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import uz.jl.dto.user.UserCreateDto;
 import uz.jl.dto.user.UserDto;
@@ -21,9 +16,8 @@ import uz.jl.security.SecurityHolder;
 import uz.jl.service.base.AbstractService;
 import uz.jl.service.base.GenericCrudService;
 import uz.jl.service.base.GenericService;
-import uz.jl.utils.validators.UserValidator;
+import uz.jl.validators.UserValidator;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 

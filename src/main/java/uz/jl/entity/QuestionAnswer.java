@@ -16,7 +16,7 @@ public class QuestionAnswer extends Auditable {
     private boolean right;
 
     @Builder(builderMethodName = "childBuilder")
-    public QuestionAnswer(ObjectId id, Date createdAt, String answer, boolean right) {
+    public QuestionAnswer(ObjectId id, Date createdAt, String answer, Boolean right) {
         super(id, createdAt);
         this.answer = answer;
         this.right = right;
