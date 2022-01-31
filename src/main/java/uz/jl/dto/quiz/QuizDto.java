@@ -1,6 +1,7 @@
 package uz.jl.dto.quiz;
 
 import uz.jl.dto.GenericDto;
+import uz.jl.dto.question.QuestionDto;
 import uz.jl.entity.Question;
 import uz.jl.enums.Category;
 import uz.jl.enums.Level;
@@ -11,11 +12,11 @@ public class QuizDto extends GenericDto {
 
     private int mark;
 
-    private Level level;
+    private String level;
 
-    private Category category;
+    private String  category;
 
-    private List<Question> questions;
+    private List<QuestionDto> questions;
 
     private boolean closed;
 

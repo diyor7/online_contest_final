@@ -3,6 +3,7 @@ package uz.jl;
 import uz.jl.configs.ApplicationContextHolder;
 import uz.jl.ui.AuthUI;
 import uz.jl.ui.QuestionUI;
+import uz.jl.ui.QuizUI;
 import uz.jl.ui.UserUI;
 import uz.jl.utils.Color;
 import uz.jl.utils.Input;
@@ -12,6 +13,7 @@ public class Application {
     private static final AuthUI authUI = ApplicationContextHolder.getBean(AuthUI.class);
     private static final UserUI userUI = ApplicationContextHolder.getBean(UserUI.class);
     private static final QuestionUI questionUI = ApplicationContextHolder.getBean(QuestionUI.class);
+    private static final QuizUI quizUI = ApplicationContextHolder.getBean(QuizUI.class);
 
     public static void main(String[] args) {
         run();
@@ -29,6 +31,7 @@ public class Application {
         Print.println(Color.BLUE, "9. Delete Question");
         Print.println(Color.BLUE, "10. Get Question");
         Print.println(Color.BLUE, "11. Get All Questions");
+        Print.println(Color.BLUE, "12. Quiz create");
         Print.println(Color.BLUE, "0. Exit");
 
         String str = Input.getStr("Enter choice: ");
@@ -45,6 +48,7 @@ public class Application {
             case "9" -> questionUI.delete();
             case "10" -> questionUI.get();
             case "11" -> questionUI.getAll();
+            case "12" -> quizUI.create();
             case "0" -> {
                 Print.println(Color.YELLOW, "Bye");
                 return;
