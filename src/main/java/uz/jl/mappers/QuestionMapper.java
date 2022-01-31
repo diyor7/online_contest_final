@@ -7,6 +7,7 @@ import uz.jl.dto.question.QuestionUpdateDto;
 import uz.jl.entity.Question;
 import uz.jl.enums.Category;
 import uz.jl.enums.Language;
+import uz.jl.enums.Level;
 import uz.jl.mappers.base.GenericMapper;
 
 import java.util.Date;
@@ -23,6 +24,7 @@ public class QuestionMapper extends GenericMapper<Question, QuestionDto, Questio
                 .answers(dto.getAnswers())
                 .language(Language.valueOf(dto.getLanguage()))
                 .category(Category.valueOf(dto.getCategory()))
+                .level(Level.valueOf(dto.getLevel()))
                 .mark(dto.getMark())
                 .createdAt(new Date())
                 .build();

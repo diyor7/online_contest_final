@@ -4,6 +4,7 @@ import lombok.*;
 import uz.jl.dto.BaseGenericDto;
 import uz.jl.entity.Question;
 import uz.jl.enums.Category;
+import uz.jl.enums.Language;
 import uz.jl.enums.Level;
 
 import java.util.List;
@@ -14,13 +15,16 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class QuizCreateDto implements BaseGenericDto {
+    private String userId;
 
-    private Level level;
+    private String language;
 
-    private Category category;
+    private String category;
 
-    private List<Question> questions;
+    private String level;
 
-    private int duration;
+//    private List<Question> questions;
+
+//    private int duration;
 
 }

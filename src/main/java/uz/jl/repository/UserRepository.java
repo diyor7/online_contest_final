@@ -35,8 +35,7 @@ public class UserRepository extends AbstractRepository<User>
     public void update(User entity) {
         BasicDBObject query = new BasicDBObject();
         ObjectMapper mapper = new ObjectMapper();
-        HashMap<String, Object> map = mapper.convertValue(entity, new TypeReference<>() {
-        });
+        HashMap<String, Object> map = mapper.convertValue(entity, new TypeReference<>() {});
         query.append("$set", new BasicDBObject(map));
         Bson filter = Filters.eq("_id", new ObjectId(String.valueOf(entity.getId())));
         collection.updateOne(filter, query);

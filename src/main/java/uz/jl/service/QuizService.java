@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import uz.jl.dto.quiz.QuizCreateDto;
 import uz.jl.dto.quiz.QuizDto;
 import uz.jl.dto.quiz.QuizUpdateDto;
+import uz.jl.entity.Quiz;
 import uz.jl.mappers.QuizMapper;
 import uz.jl.repository.QuizRepository;
 import uz.jl.response.Data;
@@ -25,7 +26,9 @@ public class QuizService extends AbstractService<QuizRepository, QuizMapper, Qui
 
     @Override
     public ResponseEntity<Data<ObjectId>> create(QuizCreateDto dto) {
-
+        validator.validOnCreate(dto);
+        Quiz quiz = mapper.fromCreateDto(dto);
+        repository.create(quiz);
         return null;
     }
 
