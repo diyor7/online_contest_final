@@ -1,6 +1,7 @@
 package uz.jl.repository;
 
 import org.bson.types.ObjectId;
+import uz.jl.entity.Question;
 import uz.jl.entity.QuestionAnswer;
 import uz.jl.repository.base.AbstractRepository;
 import uz.jl.repository.base.GenericCrudRepository;
@@ -10,10 +11,10 @@ import java.util.List;
 /**
  * @author Doston Bokhodirov, Sat 6:02 PM. 1/29/2022
  */
-public class QuestionAnswerRepository extends AbstractRepository<QuestionAnswer>
+public class QuestionAnswerRepository extends AbstractRepository<Question>
         implements GenericCrudRepository<QuestionAnswer, ObjectId> {
 
-    public QuestionAnswerRepository(Class<QuestionAnswer> clazz) {
+    public QuestionAnswerRepository(Class<Question> clazz) {
         super(clazz);
     }
 
